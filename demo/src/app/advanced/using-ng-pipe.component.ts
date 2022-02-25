@@ -1,4 +1,4 @@
-import { UpperCasePipe } from '@angular/common';
+import { DecimalPipe, UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
 
@@ -9,7 +9,8 @@ import { ADTSettings } from 'angular-datatables/src/models/settings';
 export class UsingNgPipeComponent implements OnInit {
 
   constructor(
-    private pipeInstance: UpperCasePipe
+    private pipeInstance: UpperCasePipe,
+    private pipeNumberInstance: DecimalPipe
   ) { }
 
   pageTitle = 'Using Angular Pipe';
@@ -38,6 +39,13 @@ export class UsingNgPipeComponent implements OnInit {
           title: 'Last name',
           data: 'lastName',
           ngPipeInstance: this.pipeInstance
+        },
+        {
+          title: 'Money',
+          //3.6 | number: '1.0-0'}}
+          data: 'id',
+          ngPipeInstance: this.pipeNumberInstance,
+          ngPipeArgs: ['CAD']
         }
       ]
     };
