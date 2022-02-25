@@ -37,7 +37,7 @@ import { SelectExtensionComponent } from './extensions/select-extension.componen
 import { UsingNgPipeComponent } from './advanced/using-ng-pipe.component';
 
 // Using Angular Pipe
-import { DecimalPipe, UpperCasePipe } from '@angular/common';
+import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 
 // Markdown
 import { MarkdownModule } from 'ngx-markdown';
@@ -92,7 +92,7 @@ import { DemoNgComponent } from './advanced/demo-ng-template-ref.component';
   ],
   providers: [
     UpperCasePipe,
-    DecimalPipe
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

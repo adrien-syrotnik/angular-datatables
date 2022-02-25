@@ -8,7 +8,7 @@ import { BaseDemoComponent } from '../base-demo/base-demo.component';
 import { AppRoutingModule } from '../app.routing';
 import { FormsModule } from '@angular/forms';
 import { UsingNgPipeComponent } from './using-ng-pipe.component';
-import { UpperCasePipe, DecimalPipe } from '@angular/common';
+import { UpperCasePipe, CurrencyPipe } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { Person } from 'app/person';
 
@@ -38,7 +38,7 @@ describe('UsingNgPipeComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         UpperCasePipe,
-        DecimalPipe
+        CurrencyPipe
       ]
     }).createComponent(UsingNgPipeComponent);
 
@@ -86,7 +86,7 @@ describe('UsingNgPipeComponent', () => {
   });
 
 
-  it('should have money column have money text', async () => {
+  it('should have money on id column', async () => {
     const app = fixture.debugElement.componentInstance as UsingNgPipeComponent;
     await fixture.whenStable();
 
@@ -104,11 +104,13 @@ describe('UsingNgPipeComponent', () => {
     expect(testsArray.map(index => {
       const dataRow = rows[index];
 
+      let pipeInstance = app.pipeCurrencyInstance;
+
       const NumberFromData = (instance.row(dataRow).data() as Person).id;
-      const NumberFromTable = $('td:nth-child(4)', dataRow).text();
+      const NumberFromTable = $('td:nth-child(1)', dataRow).text();
       console.log(NumberFromData)
       console.log(NumberFromTable)
-      return NumberFromTable === 'CA$' + NumberFromData;
+      return NumberFromTable === pipeInstance.transform(NumberFromData,'USD','symbol');
     }))
       .toEqual(expectedArray);
   });
